@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,74 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String  @id @default(uuid())
+  isAdmin     Boolean
+  email       String  @unique
+  phoneNumber String?
+  firstName   String
+  lastName    String
+
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?
+
+  createdAt DateTime @default(now())
+
+  requests ResidentRequest[]
+
+  @@map("users")
+}
+
+model ResidentRequest {
+  id String @id @default(uuid())
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  status RequestStatus @default(PENDING)
+
+  requestedTimeSlot    TimeSlot @relation("RequestedTimeSlot", fields: [request_time_slot_id], references: [id])
+  request_time_slot_id String
+
+  assignedTimeSlot      TimeSlot? @relation("AssignedTimeSlot", fields: [assigned_time_slot_id], references: [id])
+  assigned_time_slot_id String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("resident_requests")
+}
+
+model Address {
+  id           String @id @default(uuid())
+  streetName   String
+  streetNumber String
+  city         String
+  zipCode      String
+  latitude     Float
+  longitude    Float
+
+  users User[]
+
+  @@map("addresses")
+}
+
+model TimeSlot {
+  id          String   @id @default(uuid())
+  startTime   DateTime
+  endTime     DateTime
+  description String?
+
+  residentRequestsResidentTimeSlots ResidentRequest[] @relation("RequestedTimeSlot")
+  residentRequestsAssignedTimeSlots ResidentRequest[] @relation("AssignedTimeSlot")
+
+  @@map("time_slots")
+}
+
+enum RequestStatus {
+  COMPLETED
+  PENDING
+  CANCELED
 }

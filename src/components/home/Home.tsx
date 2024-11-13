@@ -1,9 +1,9 @@
-import React from 'react'
-
 const Home = () => {
   return (
-    <div>Home Page Content / Dashboard / Landing page / Welcome </div>
-  )
-}
+    <div>
+      <div>Home Page Content / Dashboard / Landing page / Welcome</div>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
