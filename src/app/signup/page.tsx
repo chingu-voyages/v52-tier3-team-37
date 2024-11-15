@@ -1,9 +1,9 @@
-import AuthProviderSignIn from "@/components/auth/Auth";
+import SignUp from "@/components/signup/SignUp";
 
 export default function SignUpPage() {
   return (
     <div>
-      <AuthProviderSignIn />
+      <SignUp /> 
     </div>
   );
 }
