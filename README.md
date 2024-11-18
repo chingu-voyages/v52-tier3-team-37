@@ -59,6 +59,9 @@ Follow these steps to set up and run the application locally:
 
    Ensure that `DATABASE_URL` matches the credentials and database settings configured in `docker-compose.yml`.
 
+   Create a environment variable called `AUTH_SECRET` and assign some string (any string) to it.
+   This is used by NextAuth to generate a token.
+
 4. **Generate Prisma Client**
 
    To generate the Prisma client based on the defined schema, run:

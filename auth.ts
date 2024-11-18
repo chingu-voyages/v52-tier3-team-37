@@ -68,8 +68,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           email: token.email,
           name: `${token.name}`,
           isAdmin: token.isAdmin,
-        },
-      } as any;
+        } as any,
+      };
 
       return session;
     },

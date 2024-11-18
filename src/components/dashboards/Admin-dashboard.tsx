@@ -13,7 +13,7 @@ export default function AdminDashboard() {
 
   return (
     <>
-      {session?.user.isAdmin ? (
+      {session?.user?.isAdmin ? (
         <h1>Admin Dashboard</h1>
       ) : (
         <h1>Access to this page is denied (admin)</h1>

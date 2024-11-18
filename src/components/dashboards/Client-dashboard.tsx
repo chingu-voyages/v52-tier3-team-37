@@ -7,10 +7,10 @@ export default function ClientDashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (session?.user.isAdmin) {
+    if (session?.user?.isAdmin) {
       router.replace("/dashboard/admin");
     }
-  }, [session?.user.isAdmin]);
+  }, [session?.user?.isAdmin]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
