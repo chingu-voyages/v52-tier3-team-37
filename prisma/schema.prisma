@@ -12,8 +12,7 @@ model User {
   isAdmin     Boolean
   email       String  @unique
   phoneNumber String?
-  firstName   String
-  lastName    String
+  name        String
 
   address   Address? @relation(fields: [addressId], references: [id])
   addressId String?
