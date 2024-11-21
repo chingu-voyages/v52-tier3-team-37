@@ -77,6 +77,11 @@ export default function Navbar() {
             >
               Contact
             </Link>
+            {status === "authenticated" && (
+              <Link href="/dashboard" className="hover:text-simmpy-green text-simmpy-gray-800" onClick={handleLinkClick}>
+                Dashboard
+              </Link>
+            )}
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-4 px-4 md:px-0 mt-4 md:mt-0">
