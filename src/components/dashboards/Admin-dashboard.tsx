@@ -3,10 +3,26 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+interface TimeSlot {
+  id: string;
+  startTime: string;
+  endTime: string;
+  description: string;
+}
+
 interface Ticket {
   id: string;
-  title: string;
-  description: string;
+  status: string;
+  requestedTimeSlot: TimeSlot;
+  user: User;
+}
+
+interface User {
+  id: string;
+  isAdmin: boolean;
+  email: string;
+  phoneNumber?: string; // Optional if it can be null
+  name: string;
 }
 
 export default function AdminDashboard() {
@@ -66,8 +82,13 @@ export default function AdminDashboard() {
             <ul>
               {openTickets.map((ticket) => (
                 <li key={ticket.id}>
-                  <strong>{ticket.title}</strong> - {ticket.description}
-                </li>
+                <p>
+                  <strong>{ticket.requestedTimeSlot.description}</strong> <br />
+                  Date: {new Date(ticket.requestedTimeSlot.startTime).toLocaleDateString()} <br />
+                  Time: {new Date(ticket.requestedTimeSlot.startTime).toLocaleTimeString()} - {new Date(ticket.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
+                  User: {ticket.user.name} ({ticket.user.email})
+                </p>
+              </li>
               ))}
             </ul>
           ) : (
