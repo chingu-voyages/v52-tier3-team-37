@@ -125,7 +125,7 @@ export default function AdminDashboard() {
   // Fetch open tickets when the user is an admin
   useEffect(() => {
     if (session?.user?.isAdmin) {
-      fetch("/api/tickets?status=open")
+      fetch("/api/tickets?status=pending")
         .then((response) => response.json())
         .then((data) => {
           setOpenTickets(data);
