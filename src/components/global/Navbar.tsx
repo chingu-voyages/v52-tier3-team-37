@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-6 md:px-8 py-4">
         <div className="flex items-center gap-6">
           <Image
-            src="/assets/images/icons/logo.webp"
+            src="/assets/images/icons/sippy_nav.jpg"
             alt="Logo"
             width={40}
             height={40}
