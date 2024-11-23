@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient, RequestStatus } from "@prisma/client"; // Import RequestStatus enum
-
-const prisma = new PrismaClient(); // Initialize PrismaClient
+import { prisma } from "lib/prisma";
+import { RequestStatus } from "@prisma/client"; // Import RequestStatus enumD
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -18,20 +17,20 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const tickets = await prisma.residentRequest.findMany({
-      where: { status: status as RequestStatus }, // Cast status to RequestStatus
+    const residentRequests = await prisma.residentRequest.findMany({
+      where: { status: status as RequestStatus }, 
       include: {
-        user: true, // Include related user data if needed
-        requestedTimeSlot: true, // Include time slot if needed
+        user: true, 
+        requestedTimeSlot: true, 
       },
     });
 
-    return NextResponse.json(tickets);
+    return NextResponse.json(residentRequests);
   } catch (error) {
-    console.error("Error fetching tickets:", error);
+    console.error("Error fetching resident request:", error);
     return NextResponse.json(
-      { error: "Failed to fetch tickets" },
+      { error: "Failed to fetch resident request" },
       { status: 500 }
-    );
+    );  
   }
 }

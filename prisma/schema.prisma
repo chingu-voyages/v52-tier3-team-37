@@ -1,77 +1,77 @@
-generator client {
-  provider = "prisma-client-js"
-}
+  generator client {
+    provider = "prisma-client-js"
+  }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
 
-model User {
-  id          String  @id @default(uuid())
-  isAdmin     Boolean
-  email       String  @unique
-  phoneNumber String?
-  name        String
+  model User {
+    id          String  @id @default(uuid())
+    isAdmin     Boolean
+    email       String  @unique
+    phoneNumber String?
+    name        String
 
-  address   Address? @relation(fields: [addressId], references: [id])
-  addressId String?
+    address   Address? @relation(fields: [addressId], references: [id])
+    addressId String?
 
-  createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
 
-  requests ResidentRequest[]
+    requests ResidentRequest[]
 
-  @@map("users")
-}
+    @@map("users")
+  }
 
-model ResidentRequest {
-  id String @id @default(uuid())
+  model ResidentRequest {
+    id String @id @default(uuid())
 
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
+    user    User   @relation(fields: [user_id], references: [id])
+    user_id String
 
-  status RequestStatus @default(PENDING)
+    status RequestStatus @default(PENDING)
 
-  requestedTimeSlot    TimeSlot @relation("RequestedTimeSlot", fields: [request_time_slot_id], references: [id])
-  request_time_slot_id String
+    requestedTimeSlot    TimeSlot @relation("RequestedTimeSlot", fields: [request_time_slot_id], references: [id])
+    request_time_slot_id String
 
-  assignedTimeSlot      TimeSlot? @relation("AssignedTimeSlot", fields: [assigned_time_slot_id], references: [id])
-  assigned_time_slot_id String?
+    assignedTimeSlot      TimeSlot? @relation("AssignedTimeSlot", fields: [assigned_time_slot_id], references: [id])
+    assigned_time_slot_id String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
-  @@map("resident_requests")
-}
+    @@map("resident_requests")
+  }
 
-model Address {
-  id           String @id @default(uuid())
-  streetName   String
-  streetNumber String
-  city         String
-  zipCode      String
-  latitude     Float
-  longitude    Float
+  model Address {
+    id           String @id @default(uuid())
+    streetName   String
+    streetNumber String
+    city         String
+    zipCode      String
+    latitude     Float
+    longitude    Float
 
-  users User[]
+    users User[]
 
-  @@map("addresses")
-}
+    @@map("addresses")
+  }
 
-model TimeSlot {
-  id          String   @id @default(uuid())
-  startTime   DateTime
-  endTime     DateTime
-  description String?
+  model TimeSlot {
+    id          String   @id @default(uuid())
+    startTime   DateTime
+    endTime     DateTime
+    description String?
 
-  residentRequestsResidentTimeSlots ResidentRequest[] @relation("RequestedTimeSlot")
-  residentRequestsAssignedTimeSlots ResidentRequest[] @relation("AssignedTimeSlot")
+    residentRequestsResidentTimeSlots ResidentRequest[] @relation("RequestedTimeSlot")
+    residentRequestsAssignedTimeSlots ResidentRequest[] @relation("AssignedTimeSlot")
 
-  @@map("time_slots")
-}
+    @@map("time_slots")
+  }
 
-enum RequestStatus {
-  COMPLETED
-  PENDING
-  CANCELED
-}
+  enum RequestStatus {
+    COMPLETED
+    PENDING
+    CANCELED
+  }
