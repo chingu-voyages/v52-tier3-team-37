@@ -87,12 +87,12 @@ export const POST = auth(async function POST(req) {
 
 //adding Get Method
 
-export const GET = auth(async function GET(request: NextRequest) {
-  if (!request.auth) {
+export const GET = auth(async function GET(req) {
+  if (!req.auth) {
     return NextResponse.json({ message: "Unauthorized access" }, { status: 401 });
   }
 
-  const { searchParams } = new URL(request.url);
+  const { searchParams } = new URL(req.url);
   const status = searchParams.get("status");
 
   // Validate the status parameter
