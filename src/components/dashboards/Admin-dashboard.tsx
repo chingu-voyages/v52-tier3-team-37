@@ -37,11 +37,11 @@ export default function AdminDashboard() {
         });
     }
   }, [session?.user?.isAdmin]);
- 
+
   if (error) {
     return <p>{error}</p>;
   }
- 
+
   if (loading) {
     return <p>Loading Resident Requests...</p>;
   }
