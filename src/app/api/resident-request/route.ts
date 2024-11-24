@@ -11,7 +11,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Missing status parameter" }, { status: 400 });
   }
 
-  const validStatuses: RequestStatus[] = ["COMPLETED", "PENDING", "CANCELED"];
+  const validStatuses: RequestStatus[] = [
+    RequestStatus.COMPLETED,
+    RequestStatus.PENDING,
+    RequestStatus.CANCELED,
+  ];
+  
+
   if (!validStatuses.includes(status as RequestStatus)) {
     return NextResponse.json({ error: "Invalid status parameter" }, { status: 400 });
   }
