@@ -5,6 +5,7 @@ import { residentRequestValidationSchema } from "@/lib/validation-schemas/valida
 import { ResidentReqestApiRequest } from "@/types/resident-request-api-request";
 import { Address } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { RequestStatus } from "@prisma/client"; 
 
 export const POST = auth(async function POST(req) {
   if (!req.auth) {
@@ -82,4 +83,48 @@ export const POST = auth(async function POST(req) {
   }
 
   return NextResponse.json({ message: "Request received" });
+});
+
+//adding Get Method
+
+export const GET = auth(async function GET(request: NextRequest) {
+  if (!request.auth) {
+    return NextResponse.json({ message: "Unauthorized access" }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(request.url);
+  const status = searchParams.get("status");
+
+  // Validate the status parameter
+  if (!status) {
+    return NextResponse.json({ error: "Missing status parameter" }, { status: 400 });
+  }
+
+  const validStatuses: RequestStatus[] = [
+    RequestStatus.COMPLETED,
+    RequestStatus.PENDING,
+    RequestStatus.CANCELED,
+  ];
+
+  if (!validStatuses.includes(status as RequestStatus)) {
+    return NextResponse.json({ error: "Invalid status parameter" }, { status: 400 });
+  }
+
+  try {
+    const residentRequests = await prisma.residentRequest.findMany({
+      where: { status: status as RequestStatus },
+      include: {
+        user: true,
+        requestedTimeSlot: true,
+      },
+    });
+
+    return NextResponse.json(residentRequests);
+  } catch (error) {
+    console.error("Error fetching resident request:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch resident request" },
+      { status: 500 }
+    );
+  }
 });
