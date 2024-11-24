@@ -4,7 +4,7 @@ import { assignRequestedTimeSlot } from "@/lib/utils/time-slot/time-slot-assigne
 import { residentRequestValidationSchema } from "@/lib/validation-schemas/validation-schemas";
 import { ResidentReqestApiRequest } from "@/types/resident-request-api-request";
 import { Address } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { RequestStatus } from "@prisma/client"; 
 
 export const POST = auth(async function POST(req) {
