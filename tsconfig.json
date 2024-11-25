@@ -24,6 +24,7 @@
       "@/types/*": ["types/*"],
       "@/hooks/*": ["hooks/*"],
       "@/auth": ["../auth"],
+      "@/lib/*": ["lib/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

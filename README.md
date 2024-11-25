@@ -62,6 +62,10 @@ Follow these steps to set up and run the application locally:
    Create a environment variable called `AUTH_SECRET` and assign some string (any string) to it.
    This is used by NextAuth to generate a token.
 
+   To enable address autocomplete functionality, you need to set up a Google API key and assign it to an environment variable named `GOOGLEMAPS_API_KEY`. This key is required for using the Google Places API to fetch address suggestions. Click [here](https://developers.google.com/maps/documentation/places/web-service/get-api-key) for instructions on how to obtain the key.
+
+   In your Google console, ensure that the `Places` and `PlacesDetails` API functionality are switched on.
+
 4. **Generate Prisma Client**
 
    To generate the Prisma client based on the defined schema, run:
@@ -177,7 +181,7 @@ This project is built and maintained as part of the Chingu Community. We're cons
 - Mahyar Erfanian: [GitHub](https://github.com/Mahyar-98) / [LinkedIn](https://www.linkedin.com/in/mahyar-erfanian-67968279/)
 - Franklin Macedo: [GitHub](https://github.com/frankdias92) / [LinkedIn](https://linkedin.com/in/franklin-md)
 - Nandor Nagy: [GitHub](https://github.com/n3ndor) / [LinkedIn](https://www.linkedin.com/in/nandornagylinked/)
-- # Eoin McDonnell [GitHub](https://github.com/oldmcdonnell) / [LinkedIn](https://www.linkedin.com/in/mcdonnell-eoin/)...
+- Eoin McDonnell [GitHub](https://github.com/oldmcdonnell) / [LinkedIn](https://www.linkedin.com/in/mcdonnell-eoin/)...
 
 ## Future Contributions
 

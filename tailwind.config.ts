@@ -1,3 +1,4 @@
+import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -5,6 +6,7 @@ export default {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -18,10 +20,11 @@ export default {
         "simmpy-gray-900": "#121214",
       },
       fontFamily: {
-        montserrat: ['var(--font-montserrant)'],
-        lato: ['var(--font-lato)'],
-      }
+        montserrat: ["var(--font-montserrant)"],
+        lato: ["var(--font-lato)"],
+      },
     },
   },
-  plugins: [],
+  darkMode: "class",
+  plugins: [nextui()],
 } satisfies Config;

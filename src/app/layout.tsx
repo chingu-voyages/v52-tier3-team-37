@@ -4,6 +4,7 @@ import { Lato, Montserrat } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/global/Navbar";
+import { NextUIProvider } from "@nextui-org/system";
 import { NextAuthProvider } from "./providers/NextAuth";
 
 const lato = Lato({
@@ -37,8 +38,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${lato.variable} ${montserrat.variable} antialiased`}>
         <NextAuthProvider>
-          <Navbar />
-          {children}
+          <NextUIProvider>
+            <Navbar />
+            {children}
+          </NextUIProvider>
         </NextAuthProvider>
       </body>
     </html>
