@@ -23,6 +23,7 @@ export function SubmissionForm() {
   const [formData, setFormData] = useState<Partial<FormSchemaUserFormData>>({
     name: "",
     email: "",
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     googleAddressData: {} as any,
     appointmentDate: dayjs().add(1, "day").toDate(),
     timeSlot: TimeSlot.Morning,
@@ -90,18 +91,21 @@ export function SubmissionForm() {
         formData={formData}
         setFormData={setFormData}
         errors={errors}
+        key="step1"
       />,
       <FormStepTwo
         formData={formData}
         setFormData={setFormData}
         errors={errors}
+        key="step2"
       />,
       <FormStepThree
         formData={formData}
         setFormData={setFormData}
         errors={errors}
+        key="step3"
       />,
-      <ReviewSubmit formData={formData} />,
+      <ReviewSubmit formData={formData} key="submit" />,
     ];
 
     if (index < 0) return steps[0];
@@ -125,9 +129,10 @@ export function SubmissionForm() {
   const submitResidentRequest = async () => {
     try {
       setIsBusy(true);
+      /* eslint-disable @typescript-eslint/no-explicit-any */
       await ResidentRequestService.create(formData as any);
       setIsBusy(false);
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
       setSubmitError("Failed to submit request.");
       setIsBusy(false);

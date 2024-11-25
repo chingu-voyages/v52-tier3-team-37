@@ -35,10 +35,8 @@ export async function GET(req: Request) {
 
     // Filter addresses that include "Los Angeles" and create an array of suggestions with a placeId
     const descriptionPlaceIds = placesAutocompleteResponse.predictions
-      .filter((prediction: any) =>
-        prediction.description.includes("Los Angeles")
-      )
-      .map((prediction: any) => ({
+      .filter((prediction) => prediction.description.includes("Los Angeles"))
+      .map((prediction) => ({
         description: prediction.description,
         place_id: prediction.place_id,
       }));

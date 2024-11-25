@@ -16,7 +16,7 @@ import { FormSchemaUserFormData } from "../definitions/types";
 interface FormStepThreeProps {
   formData: Partial<FormSchemaUserFormData>;
   setFormData: { (data: Partial<FormSchemaUserFormData>): void };
-  errors: any; // TODO: Fix any
+  errors: { appointmentDate?: string; timeSlot?: string };
 }
 export const FormStepThree = ({
   formData,

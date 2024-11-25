@@ -36,27 +36,29 @@ export class GoogleAddressComponentsExtractor {
   private getStreetName() {
     return this.addressComponents.find((component) =>
       component.types.includes("route")
-    )?.long_name!;
+    )!.long_name!;
   }
   private getStreetNumber() {
     return this.addressComponents.find((component) =>
       component.types.includes("street_number")
-    )?.long_name!;
+    )!.long_name!;
   }
   private getCity() {
     return this.addressComponents.find((component) =>
       component.types.includes("locality")
-    )?.long_name!;
+    )!.long_name!;
   }
   private getZipCode() {
     return this.addressComponents.find((component) =>
       component.types.includes("postal_code")
-    )?.long_name!;
+    )!.long_name!;
   }
   private getLatitude(): number {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (this.geometry.location as any).lat;
   }
   private getLongitude(): number {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (this.geometry.location as any).lng;
   }
 }

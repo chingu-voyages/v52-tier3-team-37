@@ -1,11 +1,20 @@
 import { prisma } from "lib/prisma";
-import NextAuth, { Profile } from "next-auth";
+import { NextAuthOptions, Profile } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
-  providers: [GoogleProvider, GithubProvider],
+  providers: [
+    GoogleProvider({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+    }),
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+    }),
+  ],
   session: {
     strategy: "jwt",
   },
@@ -74,14 +83,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return session;
     },
   },
-});
+};
 
 function getNameFromProfile(
   provider: "google" | "github",
   profile: Profile
 ): string {
   if (provider === "google") {
-    return `${profile.given_name} ${profile.family_name}`;
+    return `${(profile as GoogleProfile).given_name} ${
+      (profile as GoogleProfile).family_name
+    }`;
   }
 
   // Default is then github which has the name field
