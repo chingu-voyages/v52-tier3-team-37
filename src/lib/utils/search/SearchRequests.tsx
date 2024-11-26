@@ -31,7 +31,7 @@ const SearchRequests: React.FC<SearchRequestsProps> = ({ onSearch }) => {
       <input
         type="text"
         placeholder="Search by name or email"
-        className="border border-gray-300 rounded-md px-4 py-2 mr-2 w-full"
+        className="border border-gray-300 rounded-md px-4 py-2 mr-2 w-full"  //not sure if i need this... 
         onChange={(e) => handleSearch(e.target.value)}
       />
     </div>
