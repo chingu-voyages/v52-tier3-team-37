@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Collapsible from "../collapsible/Collapsible";
 import { ResidentRequest, TimeSlot, User, RequestStatus } from "@prisma/client";
+import SearchRequests from "@/lib/utils/search/SearchRequests";
 
 type ExtendedResidentRequest = ResidentRequest & {
   user: User;
