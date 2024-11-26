@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // Import for placeholder image
 import Collapsible from "../collapsible/Collapsible";
 import SearchRequests from "@/lib/utils/search/SearchRequests";
 import { ResidentRequest, TimeSlot, User, RequestStatus } from "@prisma/client";
@@ -100,80 +101,94 @@ export default function AdminDashboard() {
   return (
     <>
       {session?.user?.isAdmin ? (
-        <div className="p-6 bg-white rounded-lg shadow-md dark:bg-simmpy-gray-900">
-          <h1 className="text-3xl font-bold text-simmpy-green">Admin Dashboard</h1>
+        <div className="flex flex-wrap">
+          {/* Left Section: Dashboard Content */}
+          <div className="w-full md:w-2/3 p-6 bg-white rounded-lg shadow-md dark:bg-simmpy-gray-900">
+            <h1 className="text-3xl font-bold text-simmpy-green">Admin Dashboard</h1>
 
-          {/* Search Bar */}
-          <SearchRequests onSearch={handleSearch} />
+            {/* Search Bar */}
+            <SearchRequests onSearch={handleSearch} />
 
-          {/* Open Resident Requests */}
-          <Collapsible title="Open Resident Requests">
-            {filteredPending.length > 0 ? (
-              <ul className="mt-4 space-y-4">
-                {filteredPending.map((request) => (
-                  <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
-                    <p className="text-sm text-simmpy-gray-800">
-                      <strong>{request.requestedTimeSlot.description}</strong> <br />
-                      Date:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
-                      Time:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
-                      {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
-                      User: {request.user.name} ({request.user.email})
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 mt-4">No matching open requests found.</p>
-            )}
-          </Collapsible>
+            {/* Open Resident Requests */}
+            <Collapsible title="Open Resident Requests">
+              {filteredPending.length > 0 ? (
+                <ul className="mt-4 space-y-4">
+                  {filteredPending.map((request) => (
+                    <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
+                      <p className="text-sm text-simmpy-gray-800">
+                        <strong>{request.requestedTimeSlot.description}</strong> <br />
+                        Date:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
+                        Time:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
+                        {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
+                        User: {request.user.name} ({request.user.email})
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 mt-4">No matching open requests found.</p>
+              )}
+            </Collapsible>
 
-          {/* Completed Resident Requests */}
-          <Collapsible title="Completed Resident Requests">
-            {filteredCompleted.length > 0 ? (
-              <ul className="mt-4 space-y-4">
-                {filteredCompleted.map((request) => (
-                  <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
-                    <p className="text-sm text-simmpy-gray-800">
-                      <strong>{request.requestedTimeSlot?.description || "No description available"}</strong> <br />
-                      Date:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
-                      Time:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
-                      {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
-                      User: {request.user.name} ({request.user.email})
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 mt-4">No matching completed requests found.</p>
-            )}
-          </Collapsible>
+            {/* Completed Resident Requests */}
+            <Collapsible title="Completed Resident Requests">
+              {filteredCompleted.length > 0 ? (
+                <ul className="mt-4 space-y-4">
+                  {filteredCompleted.map((request) => (
+                    <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
+                      <p className="text-sm text-simmpy-gray-800">
+                        <strong>{request.requestedTimeSlot?.description || "No description available"}</strong> <br />
+                        Date:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
+                        Time:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
+                        {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
+                        User: {request.user.name} ({request.user.email})
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 mt-4">No matching completed requests found.</p>
+              )}
+            </Collapsible>
 
-          {/* Canceled Resident Requests */}
-          <Collapsible title="Canceled Resident Requests">
-            {filteredCanceled.length > 0 ? (
-              <ul className="mt-4 space-y-4">
-                {filteredCanceled.map((request) => (
-                  <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
-                    <p className="text-sm text-simmpy-gray-800">
-                      <strong>{request.requestedTimeSlot.description}</strong> <br />
-                      Date:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
-                      Time:{" "}
-                      {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
-                      {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
-                      User: {request.user.name} ({request.user.email})
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500 mt-4">No matching canceled requests found.</p>
-            )}
-          </Collapsible>
+            {/* Canceled Resident Requests */}
+            <Collapsible title="Canceled Resident Requests">
+              {filteredCanceled.length > 0 ? (
+                <ul className="mt-4 space-y-4">
+                  {filteredCanceled.map((request) => (
+                    <li key={request.id} className="p-4 bg-simmpy-gray-100 rounded-lg shadow">
+                      <p className="text-sm text-simmpy-gray-800">
+                        <strong>{request.requestedTimeSlot.description}</strong> <br />
+                        Date:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleDateString()} <br />
+                        Time:{" "}
+                        {new Date(request.requestedTimeSlot.startTime).toLocaleTimeString()} -{" "}
+                        {new Date(request.requestedTimeSlot.endTime).toLocaleTimeString()} <br />
+                        User: {request.user.name} ({request.user.email})
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 mt-4">No matching canceled requests found.</p>
+              )}
+            </Collapsible>
+          </div>
+
+          {/* Right Section: Map Placeholder */}
+          <div className="w-full md:w-1/3 p-6">
+            <Image
+              src="/assets/images/MapPlaceHholder.png"
+              alt="Map Placeholder"
+              width={400}
+              height={400}
+              className="rounded-lg shadow-md"
+            />
+          </div>
         </div>
       ) : (
         <h1 className="text-red-500 text-center font-bold text-2xl">
