@@ -1,9 +1,12 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-const SearchRequests = () => {
+interface SearchRequestsProps {
+  onSearch: (query: string) => void;
+}
+
+const SearchRequests: React.FC<SearchRequestsProps> = ({ onSearch }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -15,7 +18,12 @@ const SearchRequests = () => {
     } else {
       newSearchParams.delete("query");
     }
+
+    // Update the URL with the new query params
     router.push(`${pathname}?${newSearchParams.toString()}`);
+
+    // Call the onSearch prop to filter data
+    onSearch(query);
   };
 
   return (
