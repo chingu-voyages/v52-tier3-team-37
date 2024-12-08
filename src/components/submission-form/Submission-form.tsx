@@ -143,7 +143,7 @@ export function SubmissionForm() {
   // Grab the user's email from the session user
   useEffect(() => {
     if (session?.user?.email) {
-      setFormData({ ...formData, email: session.user.email });
+      setFormData({ email: session.user.email });
     }
   }, [session?.user?.email]);
 
