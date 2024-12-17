@@ -35,7 +35,7 @@ export interface ResidentRequestCollation {
     endIndex: number;   // Optional: Index of the ending point in the route
   };
   status: string; // Add this if it's part of the API response
-  route?: {
+  route: {
     originIndex: number;
     destinationIndex: number;
     duration: string;
