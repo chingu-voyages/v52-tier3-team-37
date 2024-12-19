@@ -5,6 +5,7 @@ const allUserRequestsAdminGetResponse =
   Prisma.validator<Prisma.ResidentRequestDefaultArgs>()({
     select: {
       id: true,
+      applicantName: true,
       requestedTimeSlot: { select: { startTime: true, endTime: true } },
       assignedTimeSlot: { select: { startTime: true, endTime: true } },
       address: true,

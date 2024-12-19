@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export function SubmitSuccess() {
   const router = useRouter();
   return (
-    <div className="flex p-6 flex-col gap-4 bg-simmpy-gray-600 rounded-md justify-center items-center lg:mx-[30%]">
+    <div className="flex p-6 flex-col gap-4 bg-simmpy-gray-600 rounded-md justify-center items-center lg:mx-[30%] mt-[200px]">
       <TextLabel
         text="Thank you for your submission!"
         fontSize="Text-20"

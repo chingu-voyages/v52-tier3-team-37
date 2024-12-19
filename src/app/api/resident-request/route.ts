@@ -45,10 +45,7 @@ export async function POST(req: NextRequest) {
     appointmentDate,
     timeSlot
   );
-  console.log("incoming requested appointment", appointmentDate);
 
-  console.info("startTime from assign", startTime);
-  console.info("endTime from assign", endTime);
   const { address }: { address: Partial<Address> } = googleAddressData;
 
   // This route is assuming that external users are submitting the request on their own behalf
@@ -58,11 +55,10 @@ export async function POST(req: NextRequest) {
     await prisma.user.update({
       where: { email: session.user!.email! },
       data: {
-        name,
         phoneNumber: `${areaCode}${phoneNumber}`,
-
         requests: {
           create: {
+            applicantName: name,
             requestedTimeSlot: {
               create: {
                 startTime: startTime,

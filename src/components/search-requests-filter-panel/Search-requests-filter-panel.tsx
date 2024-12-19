@@ -55,7 +55,10 @@ const SearchRequestsFilterPanel: React.FC<SearchRequestsProps> = ({
   };
 
   return (
-    <div className="flex mb-4 mt-4">
+    <div
+      className="flex mb-4 mt-4 flex-col md:flex-row gap-y-2"
+      id="search-requests-filter-panel"
+    >
       <input
         type="text"
         placeholder="Search by name or email"
@@ -125,15 +128,14 @@ const SearchRequestsFilterPanel: React.FC<SearchRequestsProps> = ({
           </ul>
         </div>
       </div>
-
       {/* Date picker filter */}
-      <div className="flex rounded hover:bg-gray-100 self-center ml-4">
+      <div className="flex rounded hover:bg-gray-100 md:self-center md:ml-4">
         <div className="flex items-center h-5">
           <input
             id="date-picker"
             name="dateFilter"
             type="date"
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 w-[20px]"
             onChange={(e) => {
               setDateFilter(e.target.value);
               onSearch(searchQuery, checkedOptions, e.target.value);
@@ -142,7 +144,7 @@ const SearchRequestsFilterPanel: React.FC<SearchRequestsProps> = ({
           />
         </div>
         <div className="ml-2 text-sm">
-          <label htmlFor="date-picker" className="font-medium text-gray-900">
+          <label htmlFor="date-picker" className="text-gray-900">
             {getDateString(dateFilter!)}
           </label>
         </div>
@@ -153,7 +155,7 @@ const SearchRequestsFilterPanel: React.FC<SearchRequestsProps> = ({
 
 const getDateString = (date: string | null): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).format("YYYY-MMM-DD");
+    return dayjs(date).format("MMM-DD-YYYY");
   }
   return "No date selected";
 };

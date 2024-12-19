@@ -11,7 +11,6 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleSignOut = async () => {
     await signOut();
     // Redirect to the home page
@@ -61,7 +60,7 @@ export default function Navbar() {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } absolute top-16 left-0 w-full md:static md:flex md:items-center justify-between bg-white md:bg-transparent`}
+          } absolute top-16 left-0 w-full md:static md:flex md:items-center justify-between bg-white md:bg-transparent shadow-md`}
         >
           <div className="flex flex-col md:flex-row md:ml-16 gap-4 md:gap-8 items-center">
             <Link

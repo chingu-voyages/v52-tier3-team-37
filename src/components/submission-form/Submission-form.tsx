@@ -140,16 +140,15 @@ export function SubmissionForm() {
     }
   };
 
-  // Grab the user's email and name from the session user
+  // Grab the user's email from the session user
   useEffect(() => {
     if (session?.user?.email) {
       setFormData({
         ...formData,
         email: session.user.email,
-        name: session.user.name!,
       });
     }
-  }, [session?.user?.email, session?.user?.name]);
+  }, [session?.user?.email]);
 
   useEffect(() => {
     // Used to handle when user is closing the browser tab and their form is not submitted
@@ -202,11 +201,13 @@ export function SubmissionForm() {
           <p className="text-red-500 text-sm font-lato">{submitError}</p>
         )}
         {!isSubmitted && (
-          <ButtonText
-            text="Cancel"
-            color="Red"
-            onClick={() => setModalOpen(true)}
-          />
+          <div className="w-full p-6">
+            <ButtonText
+              text="Cancel"
+              color="Red"
+              onClick={() => setModalOpen(true)}
+            />
+          </div>
         )}
       </div>
       {modalOpen && (

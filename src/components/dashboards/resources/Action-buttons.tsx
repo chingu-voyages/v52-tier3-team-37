@@ -36,7 +36,10 @@ export const ActionButtons = ({
         return (
           <button
             key={status}
-            className={`${bgColor} ${hoverColor} text-white px-4 py-2 rounded transition ${
+            style={{
+              color: status === RequestStatus.PENDING ? "black" : "white",
+            }}
+            className={`${bgColor} ${hoverColor} text-slate px-4 py-2 rounded transition  ${
               isCurrent ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={() => !isCurrent && onActionButtonClicked(status)}

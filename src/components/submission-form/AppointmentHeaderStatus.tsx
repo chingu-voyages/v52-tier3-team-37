@@ -12,8 +12,9 @@ export function HeaderStatus({ stages, currentStage }: StageProgressProps) {
         text="We need some information to create your request!"
         color="Gray-600"
         fontSize="Text-20"
+        classes="p-2 lg:p-0"
       />
-      <div className="flex flex-col w-full pt-4">
+      <div className="flex flex-col w-full pt-4 px-4">
         <TextLabel
           text={`${currentStage + 1} of ${stages.length}`}
           color="Gray-600"

@@ -1,5 +1,6 @@
 interface TextLabelProps {
   text: string;
+  classes?: string;
   fontSize:
     | "HeroTitle-60"
     | "Text-20"
@@ -42,10 +43,10 @@ const colorClasses = {
   "Gray-900": "text-simmpy-gray-900",
 };
 
-export function TextLabel({ text, fontSize, color }: TextLabelProps) {
+export function TextLabel({ text, fontSize, color, classes }: TextLabelProps) {
   return (
     <p
-      className={`flex w-auto antialiased ${fontSizeClasses[fontSize]} ${colorClasses[color]}`}
+      className={`flex w-auto antialiased ${fontSizeClasses[fontSize]} ${colorClasses[color]} ${classes}`}
     >
       {text}
     </p>

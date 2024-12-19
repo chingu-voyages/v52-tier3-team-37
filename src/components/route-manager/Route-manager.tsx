@@ -109,35 +109,37 @@ export default function RouteManager({ dateValue }: RouteManagerProps) {
       {session?.user?.isAdmin ? (
         <div className="p-2">
           <div>
-            <h1 className="text-3xl font-bold text-center">
+            <h2 className="text-3xl font-bold text-center">
               Route Optimization for{" "}
-              {dayjs(dateValue.toString()).format("YYYY-MMM-DD")}
-            </h1>
+              {dayjs(dateValue.toString()).format("MMM-DD-YYYY")}
+            </h2>
           </div>
           <div className="my-4">
             <div>
-              <div className="my-6">
+              <div className="my-6 md:flex md:justify-center">
                 <button
                   onClick={handleCollateDailyRequests}
-                  className="bg-simmpy-blue h-[28px] px-2 rounded-md w-full"
+                  className="bg-simmpy-blue py-2 rounded-md w-full md:w-1/2"
                   disabled={isBusy}
                 >
-                  {isBusy && <Spinner />}
-                  <span className="text-white text-sm">
-                    Generate Optimized Route
-                  </span>
+                  <div className="flex justify-center">
+                    {isBusy && <Spinner size="sm" />}
+                    <p className="text-white text-sm ml-2">
+                      Generate Optimized Route
+                    </p>
+                  </div>
                 </button>
               </div>
             </div>
           </div>
-          <div className="flex gap-20 flex-wrap">
+          <div className="flex gap-20 flex-wrap md:justify-center">
             <RouteList routes={filteredRequests} /> {/* Pass routes as props */}
-            <div className="h-[300px] w-[500px]" id="gmap"></div>
+            <div className="h-[300px] w-[500px] w-full" id="gmap"></div>
           </div>
         </div>
       ) : (
         <div>
-          <h1 className="text-simmpy-red">Not authorized</h1>
+          <p className="text-simmpy-red">Not authorized</p>
         </div>
       )}
     </>

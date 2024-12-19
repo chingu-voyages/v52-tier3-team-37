@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -27,6 +26,8 @@ model ResidentRequest {
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
+
+  applicantName String?
 
   status RequestStatus @default(PENDING)
 

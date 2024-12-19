@@ -4,16 +4,17 @@ interface RouteListProps {
   routes?: ResidentRequestCollation[]; // Mark as optional to allow default value
 }
 
-export default function RouteList({ routes = [] }: RouteListProps) { // Default to an empty array
+export default function RouteList({ routes = [] }: RouteListProps) {
+  // Default to an empty array
   return (
     <ul className="max-w-md divide-y divide-gray-200 mt-4">
       {routes.length > 0 ? (
         routes.map((route) => (
-          <li key={route.id} className="pb-3 sm:pb-4 rounded-md p-4">
+          <li key={route.id} className="pb-3 sm:pb-4 p-4">
             <div className="flex items-center space-x-4 rtl:space-x-reverse">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
-                  {route.user.name}
+                  {route.applicantName || route.user.name}
                 </p>
                 <p className="text-sm text-gray-500 truncate">
                   {`${route.address.streetNumber} ${route.address.streetName}, ${route.address.city}`}

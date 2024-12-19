@@ -201,7 +201,10 @@ export async function POST(req: Request) {
     }
     return NextResponse.json(optimizedResults);
   } catch (error) {
-    console.error("Error fetching or updating requests:", error);
+    console.error(
+      "Error fetching or updating requests:",
+      (error as Error).message
+    );
     return NextResponse.json(
       { error: "request schedule failed" },
       { status: 500 }

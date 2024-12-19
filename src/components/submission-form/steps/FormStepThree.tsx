@@ -75,30 +75,34 @@ export const FormStepThree = ({
         fontSize="Text-18"
         color="Gray-100"
       />
-      <div className="flex justify-evenly">
+      <div className="flex justify-evenly flex-wrap">
         {/* Calendar needs to go here */}
-        <Calendar
-          aria-label="Select appointment date"
-          value={appointmentDate}
-          minValue={today(getLocalTimeZone()).add({ days: 1 })}
-          onChange={handleAppointmentDateChange}
-          classNames={{
-            base: cn("bg-simmpy-gray-800"),
-            headerWrapper: cn("bg-simmpy-gray-800"),
-            gridHeaderRow: cn("bg-simmpy-gray-800"),
-            cellButton: cn(
-              "data-[selected]:bg-simmpy-green",
-              "data-[disabled]:text-simmpy-gray-900",
-              "text-white"
-            ),
-          }}
-        />
-        {slotAvailabilities && (
-          <TimeSlotPicker
-            value={formData.timeSlot}
-            onChange={handleTimeSlotChange}
-            availabilities={slotAvailabilities}
+        <div>
+          <Calendar
+            aria-label="Select appointment date"
+            value={appointmentDate}
+            minValue={today(getLocalTimeZone()).add({ days: 1 })}
+            onChange={handleAppointmentDateChange}
+            classNames={{
+              base: cn("bg-simmpy-gray-800"),
+              headerWrapper: cn("bg-simmpy-gray-800"),
+              gridHeaderRow: cn("bg-simmpy-gray-800"),
+              cellButton: cn(
+                "data-[selected]:bg-simmpy-green",
+                "data-[disabled]:text-simmpy-gray-900",
+                "text-white"
+              ),
+            }}
           />
+        </div>
+        {slotAvailabilities && (
+          <div>
+            <TimeSlotPicker
+              value={formData.timeSlot}
+              onChange={handleTimeSlotChange}
+              availabilities={slotAvailabilities}
+            />
+          </div>
         )}
       </div>
       <div className="flex">

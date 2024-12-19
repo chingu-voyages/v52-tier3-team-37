@@ -15,6 +15,7 @@ export async function adminGetResidentsRequests({
   let computedQuery = {
     select: {
       id: true,
+      applicantName: true,
       requestedTimeSlot: { select: { startTime: true, endTime: true } },
       assignedTimeSlot: { select: { startTime: true, endTime: true } },
       address: true,
