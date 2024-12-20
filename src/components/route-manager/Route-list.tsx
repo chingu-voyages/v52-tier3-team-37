@@ -1,10 +1,12 @@
 import { ResidentRequestCollation } from "@/types/resident-request-collation";
+import dayjs from "dayjs";
 
 interface RouteListProps {
   routes?: ResidentRequestCollation[]; // Mark as optional to allow default value
 }
 
 export default function RouteList({ routes = [] }: RouteListProps) {
+  console.log("8 routes", routes);
   // Default to an empty array
   return (
     <ul className="max-w-md divide-y divide-gray-200 mt-4">
@@ -20,7 +22,7 @@ export default function RouteList({ routes = [] }: RouteListProps) {
                   {`${route.address.streetNumber} ${route.address.streetName}, ${route.address.city}`}
                 </p>
                 <p className="text-sm text-gray-500 truncate">
-                  ETA: {route.route?.duration || "N/A"}
+                  ETA: {dayjs(route.estimatedArrivalTime).format("h:mm A")}
                 </p>
                 <p className="text-sm text-gray-500 truncate">
                   Status: {route.status}

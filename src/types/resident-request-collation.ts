@@ -43,4 +43,5 @@ export interface ResidentRequestCollation {
     condition: string;
   }; // Optional route property
   timeSlot?: string; // Add this if `timeSlot` is part of the backend response
+  estimatedArrivalTime?: string;
 }

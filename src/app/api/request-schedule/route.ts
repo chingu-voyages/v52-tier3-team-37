@@ -196,6 +196,9 @@ export async function POST(req: Request) {
         address: currentRequest.address,
         user: currentRequest.user,
         travelTime,
+        estimatedArrivalTime: dayjs(timeSlot.startTime)
+          .add(accumulatedTime, "s")
+          .toDate(),
         route: routeMap[`${index}-${nextIndex}`],
       });
     }
