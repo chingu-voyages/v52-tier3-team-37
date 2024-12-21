@@ -23,6 +23,7 @@ interface FormStepThreeProps {
 export const FormStepThree = ({
   formData,
   setFormData,
+  errors,
 }: FormStepThreeProps) => {
   const [appointmentDate, setAppointmentDate] = useState(
     toCalendarDateFromJSDate(formData.appointmentDate!)
@@ -103,6 +104,14 @@ export const FormStepThree = ({
               availabilities={slotAvailabilities}
             />
           </div>
+        )}
+      </div>
+      <div>
+        {errors.appointmentDate && (
+          <p className="text-red-500">Select an available appointment date.</p>
+        )}
+        {errors.timeSlot && (
+          <p className="text-red-500">Select an available time slot</p>
         )}
       </div>
       <div className="flex">

@@ -252,7 +252,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gray-100 py-10">
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <h2 className="py-4 text-2xl font-bold">
         Welcome, {session.user.name} (Admin)
@@ -478,8 +478,8 @@ const RouteOptimizerModal = ({
   dateValue: string;
 }) => {
   return (
-    <div className="absolute w-full top-[0] h-full bg-simmpy-gray-900/60">
-      <div className="modal-box w-full max-w-[800px] lg:ml-[30%] p-4 rounded-md mt-[20vh] bg-simmpy-gray-100">
+    <div className="absolute w-full top-[0] h-[100vh] bg-simmpy-gray-900/60">
+      <div className="modal-box w-full max-w-[800px] h-[100vh] p-4 rounded-md mt-[6vh] bg-simmpy-gray-100">
         <div className="flex justify-end">
           <button onClick={onClose}>X</button>
         </div>

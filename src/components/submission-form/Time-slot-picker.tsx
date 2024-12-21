@@ -2,7 +2,7 @@ import { getTimeSlotHoursClock } from "@/lib/utils/time-slot/time-slot";
 import { RequestedAvailabilityApiResponse } from "@/types/api-responses/requested-timeslot-availability-api-response.ts/requested-availability-api-response";
 import { TimeSlot } from "@/types/time-slot";
 import { Radio, RadioGroup, RadioProps, cn } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TimeSlotPickerProps {
   value?: TimeSlot | string;
@@ -26,6 +26,16 @@ export const TimeSlotPicker = ({
     setSelected(value);
     onChange?.(value as TimeSlot);
   };
+
+  useEffect(() => {
+    const updatedValue = getAvailableTimeslot(
+      availabilities.availabilities!,
+      value || TimeSlot.Morning
+    );
+    setSelected(updatedValue);
+
+    onChange?.(updatedValue as TimeSlot);
+  }, [availabilities]);
 
   return (
     <RadioGroup
